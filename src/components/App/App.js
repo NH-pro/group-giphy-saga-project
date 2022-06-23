@@ -6,6 +6,7 @@ import { Route, HashRouter as Router } from 'react-router-dom';
 // Import the used components
 import Favorites from './Favotrites';
 import Header from '../Header/Header';
+import Search from '../Search/Search';
 
 function App(props) {
   return (
@@ -16,7 +17,7 @@ function App(props) {
         <Header /> {/* Display the <Header> on all pages */}
 
         <Route path="/" exact>
-          {/* SEARCH COMPONENT */}
+          <Search />
         </Route>
 
         <Route path="/favorites" exact>
@@ -29,5 +30,3 @@ function App(props) {
 }
 
 export default App;
-
-process.env.GIPHY_API_KEY
