@@ -4,8 +4,8 @@ const Favorites = () => {
 
 const dispatch = useDispatch()
 // const favorites = useSelector(store => store.favorites)
-const categories = useSelector(store => store.categories)
-const images = useSelector(store => store.images)
+const categories = useSelector(store => store.category)
+const images = useSelector(store => store.gifArray)
 
 const [category, setCategory] = useState('')
 
