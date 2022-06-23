@@ -1,5 +1,4 @@
 import React from 'react';
-import Search from '../Search/Search';
 
 // Import the used functions / hooks
 import { Route, HashRouter as Router } from 'react-router-dom';
