@@ -1,11 +1,10 @@
 import React from 'react';
-import Search from '../Search/Search';
 
 // Import the used functions / hooks
 import { Route, HashRouter as Router } from 'react-router-dom';
 
 // Import the used components
-import Favorites from './Favotrites';
+import Favorites from './Favorites';
 import Header from '../Header/Header';
 import Search from '../Search/Search';
 

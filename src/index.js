@@ -66,7 +66,7 @@ function* setFavoriteGallery(action) {
 // and updates the REDUX state with that array of object values
 function* getCategoryNames(action) {
     try {
-        const response = yield axios.get("//api/category", action.payload);
+        const response = yield axios.get("/api/category", action.payload);
         console.log(response.data);
         yield put({
             type: "SET_CATEGORY_NAMES",
