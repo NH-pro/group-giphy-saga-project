@@ -4,14 +4,14 @@ const pool = require("../modules/pool");
 const router = express.Router();
 
 // return all favorite images
-router.get("/", (req, res) => {
-  console.log(req.body);
+router.get("/:category", (req, res) => {
+  console.log(req.params);
   const sqlQuery = `
     SELECT * FROM favorites
     JOIN category ON favorites.category_id = category.id
     WHERE category.name = $1;
   `;
-  const sqlParams = [req.body.category];
+  const sqlParams = [req.params.category];
   pool
     .query(sqlQuery, sqlParams)
     .then((response) => {
