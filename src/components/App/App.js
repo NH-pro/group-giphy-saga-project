@@ -9,3 +9,5 @@ function App(props) {
 }
 
 export default App;
+
+process.env.GIPHY_API_KEY
