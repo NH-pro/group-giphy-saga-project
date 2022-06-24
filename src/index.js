@@ -109,9 +109,9 @@ const sagaMiddleware = createSagaMiddleware();
 // Main store provider for the various REDUX state values
 const store = createStore(
   combineReducers({
-    gifArray, // State for the list of favorite GIFS
+    gifArray,  // State for the list of favorite GIFS
     searchGif, // Current GIF from our recent search
-    category, // List of category names from the DB
+    category,  // List of category names from the DB
   }),
   applyMiddleware(sagaMiddleware, logger)
 );

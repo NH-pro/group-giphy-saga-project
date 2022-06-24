@@ -8,6 +8,9 @@ import Favorites from './Favorites';
 import Header from '../Header/Header';
 import Search from '../Search/Search';
 
+// Import the stylesheet
+import "./App.css"
+
 function App(props) {
   return (
     <div>
