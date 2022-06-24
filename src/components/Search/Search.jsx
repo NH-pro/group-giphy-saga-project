@@ -27,27 +27,26 @@ function Search() {
 
     // When form submits, dispatch to search for a new gif.
     const searchGif = (event) => {
-        console.log(`in searchGif`, userCategory);
+        // Use a `preventDefault` to keep our form from refreshing the page
         event.preventDefault();
         dispatch({
             type: 'SEARCH_GIF',
-            payload: {userCategory}
+            payload: userCategory
         })
     }
 
 
     return (
-        <>
-            <form onSubmit={searchGif}>
-                <select onChange={handleCatChange}>
-                    {/* map through category */}
-                    {category.map((cat) => (
-                        <option key={cat.name} value={cat.name}>{cat.name}</option>
-                    ))}
-                </select>
-                <button type='submit'>Search for Gif</button>
-            </form>
-        </>
+        <form onSubmit={searchGif}>
+            <select onChange={handleCatChange}>
+                {/* map through category */}
+                <option key="blank" value="---">---</option>
+                {category.map((cat) => (
+                    <option key={cat.name} value={cat.name}>{cat.name}</option>
+                ))}
+            </select>
+            <button type='submit'>Search for Gif</button>
+        </form>
     )
 };
 export default Search;
