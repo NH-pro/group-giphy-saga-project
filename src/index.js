@@ -39,18 +39,17 @@ const searchGif = (state = {}, action) => {
 // Reducer for our categories on the DB, mainly used for
 // populating the drop-down
 const category = (state = [], action) => {
-    switch (action.type) {
-        case "SET_CATEGORY_NAMES":
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
+  switch (action.type) {
+    case "SET_CATEGORY_NAMES":
+      return action.payload;
+    default:
+      return state;
+  }
+};
 
 function* setFavoriteGallery(action) {
   try {
-    const response = yield axios.get("/api/favorite", action.payload);
+    const response = yield axios.get(`/api/favorite/${action.payload}`);
     console.log(response.data);
     yield put({
       type: "SET_GIF_LIST",
@@ -61,20 +60,19 @@ function* setFavoriteGallery(action) {
   }
 }
 
-
 // Function that calls the DB to get the list of our category names
 // and updates the REDUX state with that array of object values
 function* getCategoryNames(action) {
-    try {
-        const response = yield axios.get("/api/category", action.payload);
-        console.log(response.data);
-        yield put({
-            type: "SET_CATEGORY_NAMES",
-            payload: response.data,
-        });
-        } catch (err) {
-            console.error(err);
-        }
+  try {
+    const response = yield axios.get("/api/category", action.payload);
+    console.log(response.data);
+    yield put({
+      type: "SET_CATEGORY_NAMES",
+      payload: response.data,
+    });
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 // CORE: --------------------------------------------------
@@ -84,7 +82,7 @@ function* watcherSaga() {
   yield takeEvery("SET_FAVORITE_GALLERY", setFavoriteGallery);
 
   // Listens for call to update the category names from the DB
-  yield takeEvery("GET_CATEGORY_NAMES", getCategoryNames)
+  yield takeEvery("GET_CATEGORY_NAMES", getCategoryNames);
 }
 
 // Initialize the SAGA middleware listener function
@@ -93,9 +91,9 @@ const sagaMiddleware = createSagaMiddleware();
 // Main store provider for the various REDUX state values
 const store = createStore(
   combineReducers({
-    gifArray,  // State for the list of favorite GIFS
+    gifArray, // State for the list of favorite GIFS
     searchGif, // Current GIF from our recent search
-    category,  // List of category names from the DB
+    category, // List of category names from the DB
   }),
   applyMiddleware(sagaMiddleware, logger)
 );
