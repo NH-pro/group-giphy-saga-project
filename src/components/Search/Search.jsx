@@ -11,6 +11,7 @@ function Search() {
     const dispatch = useDispatch();
     const [userCategory, setUserCategory] = useState('')
 
+    console.log('userCategory', userCategory);
     // On page load, dispatch to index saga to fetch cat names.
     useEffect(() => {
         console.log(`Grabbing Category names from DB`);
@@ -26,10 +27,11 @@ function Search() {
 
     // When form submits, dispatch to search for a new gif.
     const searchGif = (event) => {
+        console.log(`in searchGif`, userCategory);
         event.preventDefault();
         dispatch({
             type: 'SEARCH_GIF',
-            payload: userCategory
+            payload: {userCategory}
         })
     }
 

@@ -48,6 +48,17 @@ const category = (state = [], action) => {
 }
 
 
+function* getGiphyGif(action) {
+    console.log(`In getGifyGif`, action);
+    const response = yield axios.get('/api/search', action);
+
+    yield put({
+        type: 'SET_ONE_GIF',
+        payload: response.data
+    })
+}
+
+
 function* setFavoriteGallery(action) {
   try {
     const response = yield axios.get("/api/favorite", action.payload);
@@ -80,6 +91,9 @@ function* getCategoryNames(action) {
 // CORE: --------------------------------------------------
 // WatcherSaga that listens for commands and calls the associated function.
 function* watcherSaga() {
+    // Listen for a call to get gif from giphy
+    yield takeEvery('SEARCH_GIF', getGiphyGif);
+
   // Put yield takeEvery("<command>", __function__)
   yield takeEvery("SET_FAVORITE_GALLERY", setFavoriteGallery);
 
