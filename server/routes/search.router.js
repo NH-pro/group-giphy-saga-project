@@ -10,11 +10,10 @@ router.get('/:category', (req, res) => {
 
     axios({
         method: 'GET',
-        url: 'https://api.giphy.com/v1/gifs/search',
+        url: 'https://api.giphy.com/v1/gifs/random',
         params: {
             api_key: process.env.GIPHY_API_KEY,
-            q: req.params.category,
-            limit: 1,
+            tag: req.params.category
         }
     })
     .then(apiRes => {
