@@ -1,3 +1,6 @@
+// Import the `Link` component
+import { Link } from "react-router-dom"
+
 // Header component that will be used throughout the App
 export default function Header() {
     
@@ -7,8 +10,8 @@ export default function Header() {
             <h1>Giphy Search!</h1>
             <nav>
                 <ul>
-                    <li>Search Giphy!</li>
-                    <li>See Favorites</li>
+                    <Link to="/">Search Giphy!</Link>
+                    <Link to="/favorites">See Favorites</Link>
                 </ul>
             </nav>
         </header>

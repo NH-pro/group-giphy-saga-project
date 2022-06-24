@@ -11,6 +11,7 @@ function Search() {
     const dispatch = useDispatch();
     const [userCategory, setUserCategory] = useState('')
 
+    console.log('userCategory', userCategory);
     // On page load, dispatch to index saga to fetch cat names.
     useEffect(() => {
         console.log(`Grabbing Category names from DB`);
@@ -26,6 +27,7 @@ function Search() {
 
     // When form submits, dispatch to search for a new gif.
     const searchGif = (event) => {
+        // Use a `preventDefault` to keep our form from refreshing the page
         event.preventDefault();
         dispatch({
             type: 'SEARCH_GIF',
@@ -35,17 +37,16 @@ function Search() {
 
 
     return (
-        <>
-            <form onSubmit={searchGif}>
-                <select onChange={handleCatChange}>
-                    {/* map through category */}
-                    {category.map((cat) => (
-                        <option key={cat.name} value={cat.name}>{cat.name}</option>
-                    ))}
-                </select>
-                <button type='submit'>Search for Gif</button>
-            </form>
-        </>
+        <form onSubmit={searchGif}>
+            <select onChange={handleCatChange}>
+                {/* map through category */}
+                <option key="blank" value="---">---</option>
+                {category.map((cat) => (
+                    <option key={cat.name} value={cat.name}>{cat.name}</option>
+                ))}
+            </select>
+            <button type='submit'>Search for Gif</button>
+        </form>
     )
 };
 export default Search;

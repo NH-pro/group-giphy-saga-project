@@ -47,8 +47,22 @@ const category = (state = [], action) => {
   }
 };
 
+
+// Function that gets a single GIF from our server
+function* getGiphyGif(action) {
+  // Send the request category through via a PARAM
+  const response = yield axios.get(`/api/search/${action.payload}`);
+  yield put({
+    type: 'SET_ONE_GIF',
+    payload: response.data
+  })
+}
+
+
 function* setFavoriteGallery(action) {
+  
   let response;
+
   try {
     response = yield axios.get(`/api/favorite/${action.payload}`);
     console.log(response.data);
@@ -79,6 +93,9 @@ function* getCategoryNames(action) {
 // CORE: --------------------------------------------------
 // WatcherSaga that listens for commands and calls the associated function.
 function* watcherSaga() {
+  // Listen for a call to get gif from giphy
+  yield takeEvery('SEARCH_GIF', getGiphyGif);
+
   // Put yield takeEvery("<command>", __function__)
   yield takeEvery("SET_FAVORITE_GALLERY", setFavoriteGallery);
 
