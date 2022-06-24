@@ -89,8 +89,8 @@ function* getCategoryNames(action) {
 // CORE: --------------------------------------------------
 // WatcherSaga that listens for commands and calls the associated function.
 function* watcherSaga() {
-    // Listen for a call to get gif from giphy
-    yield takeEvery('SEARCH_GIF', getGiphyGif);
+  // Listen for a call to get gif from giphy
+  yield takeEvery('SEARCH_GIF', getGiphyGif);
 
   // Put yield takeEvery("<command>", __function__)
   yield takeEvery("SET_FAVORITE_GALLERY", setFavoriteGallery);
@@ -105,9 +105,9 @@ const sagaMiddleware = createSagaMiddleware();
 // Main store provider for the various REDUX state values
 const store = createStore(
   combineReducers({
-    gifArray, // State for the list of favorite GIFS
+    gifArray,  // State for the list of favorite GIFS
     searchGif, // Current GIF from our recent search
-    category, // List of category names from the DB
+    category,  // List of category names from the DB
   }),
   applyMiddleware(sagaMiddleware, logger)
 );
