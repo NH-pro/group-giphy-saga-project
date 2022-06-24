@@ -3,18 +3,22 @@ const axios = require('axios');
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    console.log(`In Router GET /search`, req.body);
+router.get('/:category', (req, res) => {
+
+    console.log(`In Router GET /search`, req.params.category);
+    console.log(process.env.GIPHY_API_KEY, "???")
+
     axios({
         method: 'GET',
         url: 'https://api.giphy.com/v1/gifs/search',
         params: {
             api_key: process.env.GIPHY_API_KEY,
-            q: req.body
+            q: req.params.category,
+            limit: 1,
         }
     })
     .then(apiRes => {
-        console.log('Router GET /search request success!', apiRes);
+        console.log('Router GET /search request success!', apiRes.data);
         res.send(apiRes.data);
     })
     .catch(err => {
