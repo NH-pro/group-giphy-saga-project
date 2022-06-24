@@ -61,6 +61,8 @@ function* getGiphyGif(action) {
 
 function* setFavoriteGallery(action) {
   
+  console.log(action, "????")
+
   let response;
 
   try {
