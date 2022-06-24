@@ -5,13 +5,29 @@ const router = express.Router();
 
 // return all favorite images
 router.get("/:category", (req, res) => {
-  console.log(req.params.category);
-  const sqlQuery = `
+  
+  // Set the default `sqlQuery` to search by category
+  let sqlQuery = `
     SELECT * FROM favorites
     JOIN category ON favorites.category_id = category.id
     WHERE category.name = $1;
   `;
-  const sqlParams = [req.params.category];
+  // Set the `sqlParams` to contain the search parameter
+  let sqlParams = [req.params.category];
+
+  // If favorites is `all`, reset the sqlQuery and sqlParams
+  if (req.params.category === 'all') {
+    // Set the `sqlQuery` to show everything
+    sqlQuery = `
+      SELECT * FROM favorites;
+    `;
+    // Have an empty `sqlParams`
+    sqlParams = []
+  }
+
+
+
+  
   pool
     .query(sqlQuery, sqlParams)
     .then((response) => {

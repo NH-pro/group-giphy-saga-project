@@ -19,7 +19,7 @@ useEffect(() => {
 
 function handleSubmit(evt) {
     evt.preventDefault()
-    console.log('category submit')
+    console.log('category submit, "')
     dispatch({
         type: "SET_FAVORITE_GALLERY",
         payload: category
@@ -33,6 +33,9 @@ function handleSubmit(evt) {
             <h2 className='favorites-title'>Favorites</h2>
             <form onSubmit={handleSubmit}>
                 <select id='categories-select' onChange={evt => setCategory(evt.target.value)}>
+                {/* Set a blank input value to get all `Favorite` gifs. Set the value to `all` --> checked against on the server */}
+                <option key="blank" value="all">---</option>
+                {/* map through category */}
                 {categories.map((cat) => (
                         <option key={cat.name} value={cat.name}>{cat.name}</option>
                     ))}
