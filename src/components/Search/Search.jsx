@@ -36,6 +36,8 @@ function Search() {
     }
 
     console.log(`the gif is:`, gif);
+    let gifList = gif.data || [];
+    console.log('gifList', gifList)
     return (
         <>
             <form onSubmit={searchGif}>
@@ -48,10 +50,12 @@ function Search() {
                 </select>
                 <button type='submit'>Search for Gif</button>
             </form>
-            <label>
-                YOUR GIF!
-                {gif.data && <img src={gif.data.images.original.url}/>}
-            </label>
+            
+                {gifList.map((gif) => {
+                    return (
+                        <img key={gif.id} src={gif.images.original.url} />
+                    )
+                })}
         </>
 
     )
