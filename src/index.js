@@ -48,16 +48,17 @@ const category = (state = [], action) => {
 };
 
 function* setFavoriteGallery(action) {
+  let response;
   try {
-    const response = yield axios.get(`/api/favorite/${action.payload}`);
+    response = yield axios.get(`/api/favorite/${action.payload}`);
     console.log(response.data);
-    yield put({
-      type: "SET_GIF_LIST",
-      payload: response.data,
-    });
   } catch (err) {
     console.error(err);
   }
+  yield put({
+    type: "SET_GIF_LIST",
+    payload: response.data,
+  });
 }
 
 // Function that calls the DB to get the list of our category names

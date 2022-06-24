@@ -9,10 +9,6 @@ CREATE TABLE "category" (
     "name" VARCHAR (100) NOT NULL
 );
 
--- Default categories. You may change them :)
-INSERT INTO "category" ("name")
-VALUES ('funny'), ('cohort'), ('cartoon'), ('nsfw'), ('meme');
-
 -- Favorites table
 CREATE TABLE "favorites" (
     "id" SERIAL PRIMARY KEY,
@@ -20,6 +16,11 @@ CREATE TABLE "favorites" (
     "category_id" INT REFERENCES "category" NOT NULL,
     "url" VARCHAR NOT NULL
 );
+
+-- Default categories. You may change them :)
+INSERT INTO "category" ("name")
+VALUES ('funny'), ('cohort'), ('cartoon'), ('nsfw'), ('meme');
+
 
 -- Create some dummy-data to start with
 INSERT INTO "favorites"

@@ -9,7 +9,16 @@ const images = useSelector(store => store.gifArray)
 
 const [category, setCategory] = useState('')
 
-function handleSubmit() {
+useEffect(() => {
+    console.log(`Grabbing Category names from DB`);
+    console.log(images)
+    dispatch({
+        type: 'GET_CATEGORY_NAMES'
+    })
+}, [])
+
+function handleSubmit(evt) {
+    evt.preventDefault()
     console.log('category submit')
     dispatch({
         type: "SET_FAVORITE_GALLERY",
@@ -24,9 +33,9 @@ function handleSubmit() {
             <h2 className='favorites-title'>Favorites</h2>
             <form onSubmit={handleSubmit}>
                 <select id='categories-select' onChange={evt => setCategory(evt.target.value)}>
-                    {categories.map((cat) => {
-                        <option value={cat.name}>{cat.name}</option>
-                    })}
+                {categories.map((cat) => (
+                        <option key={cat.name} value={cat.name}>{cat.name}</option>
+                    ))}
                 </select>
                 <button type='submit'>Search</button>
             </form>
