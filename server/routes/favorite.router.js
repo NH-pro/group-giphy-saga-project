@@ -19,9 +19,8 @@ router.get("/:category", (req, res) => {
     })
     .catch((err) => {
       console.log("error in GET FAVORITE", err);
+      res.sendStatus(500);
     });
-
-  res.sendStatus(200);
 });
 
 // add a new favorite
