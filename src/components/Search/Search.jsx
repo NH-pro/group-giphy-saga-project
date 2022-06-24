@@ -9,7 +9,8 @@ function Search() {
     const category = useSelector(store => store.category);
 
     const dispatch = useDispatch();
-    const [userCategory, setUserCategory] = useState('')
+    const [userCategory, setUserCategory] = useState('');
+    const [userSearch, setUserSearch] = useState('');
 
     console.log('userCategory', userCategory);
     // On page load, dispatch to index saga to fetch cat names.
@@ -25,22 +26,31 @@ function Search() {
         setUserCategory(event.target.value);
     }
 
+    // Search input change handler
+    const handleSearchInput = (event) => {
+        setUserSearch(event.target.value);
+    }
+
     // When form submits, dispatch to search for a new gif.
     const searchGif = (event) => {
         // Use a `preventDefault` to keep our form from refreshing the page
         event.preventDefault();
+
         dispatch({
             type: 'SEARCH_GIF',
-            payload: userCategory
+            payload: {
+                userSearch,
+                userCategory
+            }
         })
     }
 
     console.log(`the gif is:`, gif);
     let gifList = gif.data || [];
-    console.log('gifList', gifList)
     return (
         <>
             <form onSubmit={searchGif}>
+                <input onChange={handleSearchInput} type="text" placeholder= "search terms"/>
                 <select onChange={handleCatChange}>
                     {/* map through category */}
                     <option key="blank" value="---">---</option>

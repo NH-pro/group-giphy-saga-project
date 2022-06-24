@@ -50,8 +50,10 @@ const category = (state = [], action) => {
 
 // Function that gets a single GIF from our server
 function* getGiphyGif(action) {
+
+  console.log('this is getGiphyGif action', action);
   // Send the request category through via a PARAM
-  const response = yield axios.get(`/api/search/${action.payload}`);
+  const response = yield axios.get(`/api/search/${action.payload.userCategory}/${action.payload.userSearch}`);
   yield put({
     type: 'SET_ONE_GIF',
     payload: response.data
