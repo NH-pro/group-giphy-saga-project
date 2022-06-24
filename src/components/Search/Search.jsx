@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function Search() {
     // gif data store
-    const gif = useSelector(store => store.gif);
+    const gif = useSelector(store => store.searchGif);
     // category name store
     const category = useSelector(store => store.category);
 
@@ -35,18 +35,25 @@ function Search() {
         })
     }
 
-
+    console.log(`the gif is:`, gif);
     return (
-        <form onSubmit={searchGif}>
-            <select onChange={handleCatChange}>
-                {/* map through category */}
-                <option key="blank" value="---">---</option>
-                {category.map((cat) => (
-                    <option key={cat.name} value={cat.name}>{cat.name}</option>
-                ))}
-            </select>
-            <button type='submit'>Search for Gif</button>
-        </form>
+        <>
+            <form onSubmit={searchGif}>
+                <select onChange={handleCatChange}>
+                    {/* map through category */}
+                    <option key="blank" value="---">---</option>
+                    {category.map((cat) => (
+                        <option key={cat.name} value={cat.name}>{cat.name}</option>
+                    ))}
+                </select>
+                <button type='submit'>Search for Gif</button>
+            </form>
+            <label>
+                YOUR GIF!
+                {gif.data && <img src={gif.data.images.original.url}/>}
+            </label>
+        </>
+
     )
 };
 export default Search;
